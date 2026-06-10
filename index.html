@@ -23,29 +23,39 @@
   <main class="main">
     <div class="container">
 
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field" autocomplete="off">
+      <div class="toolbar">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field" autocomplete="off">
+        </div>
+        <button id="btnViewCalendar" class="btn-calendar">
+          <span class="material-symbols-outlined">calendar_month</span>
+          Ver Agendamentos
+        </button>
       </div>
 
       <div class="cards" id="servicesGrid">
         <div class="card-services" data-service-name="Terapia Ocupacional">
           <span class="material-symbols-outlined">work_history</span>
           <p>Terapia Ocupacional</p>
+          <span class="btn-agendar">Agendar</span>
         </div>
 
         <div class="card-services" data-service-name="Fisioterapia Esportiva">
           <span class="material-symbols-outlined">sports_gymnastics</span>
           <p>Fisioterapia Esportiva</p>
+          <span class="btn-agendar">Agendar</span>
         </div>
 
         <div class="card-services" data-service-name="Nutrição">
           <span class="material-symbols-outlined">nutrition</span>
           <p>Nutrição</p>
+          <span class="btn-agendar">Agendar</span>
         </div>
 
         <div class="card-services" data-service-name="Psicologia do Esporte">
           <span class="material-symbols-outlined">psychology</span>
           <p>Psicologia do Esporte</p>
+          <span class="btn-agendar">Agendar</span>
         </div>
       </div>
 
@@ -55,6 +65,80 @@
 
     </div>
   </main>
+
+  <div id="bookingModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+      <h2 id="modalTitle">Agendar Serviço</h2>
+      <p class="modal-subtitle">Preencha os dados para confirmar sua consulta.</p>
+      
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="modalService">Serviço Selecionado</label>
+          <input type="text" id="modalService" readonly class="field-disabled">
+        </div>
+        <div class="form-group">
+          <label for="bookingDate">Escolha a Data</label>
+          <input type="date" id="bookingDate" required class="field-form">
+        </div>
+        <div class="form-group">
+          <label for="bookingTime">Escolha o Horário</label>
+          <input type="time" id="bookingTime" required class="field-form">
+        </div>
+        <button type="submit" class="btn-submit">Confirmar Agendamento</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="calendarModal" class="modal-overlay hidden">
+    <div class="modal-content modal-calendar-content">
+      <button class="close-modal" id="closeCalendarBtn">&times;</button>
+      <h2>Meus Agendamentos (Estilo Calendário)</h2>
+      <p class="modal-subtitle">Confira abaixo seus horários marcados para Junho de 2026.</p>
+      
+      <div class="calendar-grid">
+        <div class="calendar-day-header">Dom</div>
+        <div class="calendar-day-header">Seg</div>
+        <div class="calendar-day-header">Ter</div>
+        <div class="calendar-day-header">Qua</div>
+        <div class="calendar-day-header">Qui</div>
+        <div class="calendar-day-header">Sex</div>
+        <div class="calendar-day-header">Sáb</div>
+        
+        <div class="calendar-day empty"></div>
+        <div class="calendar-day">1</div>
+        <div class="calendar-day">2</div>
+        <div class="calendar-day bookmarked">3 <span class="event-tag">Nutrição - 14h</span></div>
+        <div class="calendar-day">4</div>
+        <div class="calendar-day">5</div>
+        <div class="calendar-day">6</div>
+        <div class="calendar-day">7</div>
+        <div class="calendar-day bookmarked">8 <span class="event-tag">Fisioterapia - 09h</span></div>
+        <div class="calendar-day">9</div>
+        <div class="calendar-day current">10</div>
+        <div class="calendar-day">11</div>
+        <div class="calendar-day">12</div>
+        <div class="calendar-day">13</div>
+        <div class="calendar-day">14</div>
+        <div class="calendar-day">15</div>
+        <div class="calendar-day">16</div>
+        <div class="calendar-day">17</div>
+        <div class="calendar-day">18</div>
+        <div class="calendar-day">19</div>
+        <div class="calendar-day">20</div>
+        <div class="calendar-day">21</div>
+        <div class="calendar-day">22</div>
+        <div class="calendar-day">23</div>
+        <div class="calendar-day">24</div>
+        <div class="calendar-day">25</div>
+        <div class="calendar-day">26</div>
+        <div class="calendar-day">27</div>
+        <div class="calendar-day">28</div>
+        <div class="calendar-day">29</div>
+        <div class="calendar-day">30</div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 

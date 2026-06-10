@@ -23,7 +23,7 @@ a {
     margin: 0 auto;
 }
 
-/* Header & Navbar Responsiva */
+/* Header & Navbar */
 header {
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -63,13 +63,20 @@ header {
   color: #fff;
 }
 
-/* Conteúdo Principal */
+/* Conteúdo Principal e Toolbar */
 .main {
     padding-top: 110px; 
 }
 
-.search-container {
+.toolbar {
+    display: flex;
+    gap: 15px;
+    align-items: center;
     margin-bottom: 2.5rem;
+}
+
+.search-container {
+    flex: 1;
 }
 
 .field {
@@ -87,6 +94,27 @@ header {
     box-shadow: 0 0 8px rgba(0, 86, 179, 0.1);
 }
 
+/* Botão do Calendário */
+.btn-calendar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-calendar:hover {
+    background-color: #218838;
+}
+
 /* Grid de Cards */
 .cards {
     display: grid;
@@ -100,12 +128,12 @@ header {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
-    padding: 35px 25px; 
+    padding: 30px 20px; 
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
-    gap: 1rem;
+    gap: 1.2rem;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
@@ -127,6 +155,186 @@ header {
     color: #444;
 }
 
+/* Botão de Agendar Interno */
+.btn-agendar {
+    background-color: #0056b3;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: 80%;
+}
+
+.card-services:hover .btn-agendar {
+    background-color: #003d82;
+}
+
+/* Modais (Janelas Suspensas) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.modal-subtitle {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+/* Formulário do Modal */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.field-form {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.field-form:focus {
+    border-color: #0056b3;
+}
+
+.field-disabled {
+    padding: 12px;
+    border: 2px solid #eee;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #777;
+    font-weight: 600;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #003d82;
+}
+
+/* Customização para o Modal Calendário */
+.modal-calendar-content {
+    max-width: 750px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.calendar-day-header {
+    font-weight: 600;
+    text-align: center;
+    padding: 5px;
+    color: #555;
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.calendar-day {
+    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    min-height: 70px;
+    padding: 5px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calendar-day.empty {
+    background-color: #f1f1f1;
+    border: none;
+}
+
+.calendar-day.current {
+    background-color: #e6f0fa;
+    border: 2px solid #0056b3;
+    font-weight: bold;
+}
+
+.calendar-day.bookmarked {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.event-tag {
+    font-size: 0.7rem;
+    background-color: #28a745;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-top: 5px;
+    text-align: center;
+}
+
 /* Mensagem de Feedback Vazio */
 .no-results {
     text-align: center;
@@ -136,26 +344,49 @@ header {
     font-weight: 500;
 }
 
-/* Classe utilitária para esconder elementos */
+/* Utilitários */
 .hidden {
   display: none !important;
 }
 
-/* Media Query para Celulares */
+/* Media Query Responsiva */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-calendar {
+        justify-content: center;
+    }
+    .calendar-grid {
+        gap: 4px;
+    }
+    .calendar-day {
+        min-height: 50px;
+        font-size: 0.8rem;
+    }
+    .event-tag {
+        display: none; /* Esconde texto longo de eventos no celular */
+    }
+    .calendar-day.bookmarked::after {
+        content: "•";
+        color: #28a745;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+}
+
 @media (max-width: 600px) {
     .navbar {
         justify-content: center; 
         gap: 0.8rem;
     }
-    
     .nav-link {
         font-size: 0.85rem;
     }
-    
     .main {
-        padding-top: 140px; 
+        padding-top: 150px; 
     }
-
     .cards {
       grid-template-columns: 1fr; 
     }
