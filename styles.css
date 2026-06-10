@@ -6,7 +6,7 @@
 }
 
 html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     color: #333;
 }
@@ -65,12 +65,11 @@ header {
 
 /* Conteúdo Principal */
 .main {
-    padding-top: 110px; /* Aumentado para acomodar a busca */
+    padding-top: 110px; 
 }
 
 .search-container {
     margin-bottom: 2.5rem;
-    position: relative; /* Para posicionar elementos futuros */
 }
 
 .field {
@@ -88,11 +87,11 @@ header {
     box-shadow: 0 0 8px rgba(0, 86, 179, 0.1);
 }
 
-/* Grid de Cards Inteligente e Responsivo */
+/* Grid de Cards */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Aumentado minmax para cards maiores */
-    gap: 30px; /* Aumentado o gap */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 30px; 
     padding: 10px 0;
 }
 
@@ -101,7 +100,7 @@ header {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
-    padding: 35px 25px; /* Aumentado o padding */
+    padding: 35px 25px; 
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -112,28 +111,37 @@ header {
 }
 
 .card-services:hover {
-    transform: translateY(-6px); /* Aumentado o pulo */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
+    transform: translateY(-6px); 
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
     border-color: #0056b3;
 }
 
 .card-services .material-symbols-outlined {
-    font-size: 3rem; /* Ícones maiores */
+    font-size: 3rem; 
     color: #0056b3; 
 }
 
 .card-services p {
-    font-weight: 600; /* Negrito mais forte */
+    font-weight: 600; 
     font-size: 1.1rem;
     color: #444;
 }
 
-/* Esconder os cards que não batem com a busca */
-.card-services.hidden {
-  display: none;
+/* Mensagem de Feedback Vazio */
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+    padding: 40px 0;
+    font-weight: 500;
 }
 
-/* Media Query para telas pequenas (Celulares) */
+/* Classe utilitária para esconder elementos */
+.hidden {
+  display: none !important;
+}
+
+/* Media Query para Celulares */
 @media (max-width: 600px) {
     .navbar {
         justify-content: center; 
@@ -149,6 +157,6 @@ header {
     }
 
     .cards {
-      grid-template-columns: 1fr; /* 1 coluna no celular */
+      grid-template-columns: 1fr; 
     }
 }

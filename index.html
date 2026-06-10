@@ -24,7 +24,7 @@
     <div class="container">
 
       <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field">
+        <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field" autocomplete="off">
       </div>
 
       <div class="cards" id="servicesGrid">
@@ -38,15 +38,19 @@
           <p>Fisioterapia Esportiva</p>
         </div>
 
-        <div class="card-services" data-service-name="Nutrição Esportiva">
+        <div class="card-services" data-service-name="Nutrição">
           <span class="material-symbols-outlined">nutrition</span>
-          <p>Nutrição Esportiva</p>
+          <p>Nutrição</p>
         </div>
 
         <div class="card-services" data-service-name="Psicologia do Esporte">
           <span class="material-symbols-outlined">psychology</span>
           <p>Psicologia do Esporte</p>
         </div>
+      </div>
+
+      <div id="noResultsMessage" class="no-results hidden">
+        Serviços não encontrados
       </div>
 
     </div>
