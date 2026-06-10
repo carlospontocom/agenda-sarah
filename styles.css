@@ -25,7 +25,19 @@ a{
 header{
     box-shadow: 0 0 10px #00000040;
     padding: .6rem 0;
+    position: fixed;
+    width: 100%;
 }
+
+.navbar{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.main{
+    padding-top: 60px;
+}
+
 .cards{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
