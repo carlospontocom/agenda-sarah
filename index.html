@@ -13,7 +13,7 @@
 
   <header>
     <nav class="navbar container">
-      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link active">Home</a>
       <a href="#" class="nav-link">Paciente</a>
       <a href="#" class="nav-link">Agenda do Dia</a>
       <a href="#" class="nav-link">Próximas Atividades</a>
@@ -24,33 +24,35 @@
     <div class="container">
 
       <div class="search-container">
-        <input type="text" placeholder="Buscar por serviços" class="field">
+        <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field">
       </div>
 
-      <div class="cards">
-        <div class="card-services">
-          <span class="material-symbols-outlined">home</span>
-          <p>Início</p>
+      <div class="cards" id="servicesGrid">
+        <div class="card-services" data-service-name="Terapia Ocupacional">
+          <span class="material-symbols-outlined">work_history</span>
+          <p>Terapia Ocupacional</p>
         </div>
 
-        <div class="card-services">
-          <span class="material-symbols-outlined">exercise</span>
-          <p>Terapia funcional</p>
+        <div class="card-services" data-service-name="Fisioterapia Esportiva">
+          <span class="material-symbols-outlined">sports_gymnastics</span>
+          <p>Fisioterapia Esportiva</p>
         </div>
 
-        <div class="card-services">
-          <span class="material-symbols-outlined">exercise</span>
-          <p>Fisioterapia</p>
+        <div class="card-services" data-service-name="Nutrição Esportiva">
+          <span class="material-symbols-outlined">nutrition</span>
+          <p>Nutrição Esportiva</p>
         </div>
 
-        <div class="card-services">
-          <span class="material-symbols-outlined">groups</span>
-          <p>Atividade em Grupo</p>
+        <div class="card-services" data-service-name="Psicologia do Esporte">
+          <span class="material-symbols-outlined">psychology</span>
+          <p>Psicologia do Esporte</p>
         </div>
       </div>
 
     </div>
   </main>
+
+  <script src="script.js"></script>
 
 </body>
 </html>

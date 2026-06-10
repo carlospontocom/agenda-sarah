@@ -6,7 +6,7 @@
 }
 
 html {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
     background-color: #f8f9fa;
     color: #333;
 }
@@ -40,7 +40,7 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    flex-wrap: wrap; /* Permite quebrar linha em telas muito pequenas */
+    flex-wrap: wrap; 
 }
 
 .nav-link {
@@ -49,41 +49,50 @@ header {
     color: #555;
     transition: color 0.3s;
     text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 
 .nav-link:hover {
-    color: #0056b3; /* Cor de destaque ao passar o mouse */
+    color: #0056b3; 
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+.nav-link.active {
+  background-color: #0056b3;
+  color: #fff;
 }
 
 /* Conteúdo Principal */
 .main {
-    padding-top: 90px; /* Ajustado para não cobrir o conteúdo devido ao header fixo */
+    padding-top: 110px; /* Aumentado para acomodar a busca */
 }
 
 .search-container {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative; /* Para posicionar elementos futuros */
 }
 
 .field {
     border-radius: 8px;
     border: 2px solid #e0e0e0;
-    padding: 12px 16px;
+    padding: 14px 20px;
     width: 100%;
-    font-size: 1rem;
+    font-size: 1.1rem;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .field:focus {
     border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0, 86, 179, 0.1);
 }
 
 /* Grid de Cards Inteligente e Responsivo */
 .cards {
     display: grid;
-    /* auto-fit + minmax garante que nenhum card fique menor que 200px, quebrando linhas se necessário */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Aumentado minmax para cards maiores */
+    gap: 30px; /* Aumentado o gap */
     padding: 10px 0;
 }
 
@@ -92,37 +101,42 @@ header {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
-    padding: 30px 20px;
+    padding: 35px 25px; /* Aumentado o padding */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo do card */
+    align-items: center; 
     text-align: center;
-    gap: 0.8rem;
+    gap: 1rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .card-services:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-6px); /* Aumentado o pulo */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
     border-color: #0056b3;
 }
 
 .card-services .material-symbols-outlined {
-    font-size: 2.5rem;
-    color: #0056b3; /* Deixa os ícones com uma cor padrão bonita */
+    font-size: 3rem; /* Ícones maiores */
+    color: #0056b3; 
 }
 
 .card-services p {
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 600; /* Negrito mais forte */
+    font-size: 1.1rem;
     color: #444;
+}
+
+/* Esconder os cards que não batem com a busca */
+.card-services.hidden {
+  display: none;
 }
 
 /* Media Query para telas pequenas (Celulares) */
 @media (max-width: 600px) {
     .navbar {
-        justify-content: center; /* Centraliza os links caso eles quebrem linha */
+        justify-content: center; 
         gap: 0.8rem;
     }
     
@@ -131,6 +145,10 @@ header {
     }
     
     .main {
-        padding-top: 120px; /* Espaço extra pois o header pode ficar mais alto no celular */
+        padding-top: 140px; 
+    }
+
+    .cards {
+      grid-template-columns: 1fr; /* 1 coluna no celular */
     }
 }
