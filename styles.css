@@ -171,7 +171,7 @@ header {
     background-color: #003d82;
 }
 
-/* Modais (Janelas Suspensas) */
+/* Modais */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -222,7 +222,7 @@ header {
     font-size: 0.95rem;
 }
 
-/* Formulário do Modal */
+/* Formulário */
 .form-group {
     margin-bottom: 20px;
     display: flex;
@@ -243,10 +243,17 @@ header {
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
+    background-color: #fff;
 }
 
 .field-form:focus {
     border-color: #0056b3;
+}
+
+.field-form:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
 }
 
 .field-disabled {
@@ -276,66 +283,50 @@ header {
     background-color: #003d82;
 }
 
-/* Customização para o Modal Calendário */
+/* Customização para Visualização da Agenda */
 .modal-calendar-content {
-    max-width: 750px;
+    max-width: 600px;
 }
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.calendar-day-header {
-    font-weight: 600;
-    text-align: center;
-    padding: 5px;
-    color: #555;
-    background-color: #eee;
-    border-radius: 4px;
-}
-
-.calendar-day {
-    background-color: #fdfdfd;
-    border: 1px solid #e0e0e0;
-    min-height: 70px;
-    padding: 5px;
-    font-size: 0.9rem;
-    border-radius: 6px;
+.calendar-list-view {
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 15px;
+    padding-right: 5px;
+}
+
+.appointment-item {
+    background-color: #f1f8ff;
+    border-left: 5px solid #0056b3;
+    padding: 15px;
+    border-radius: 4px;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.calendar-day.empty {
-    background-color: #f1f1f1;
-    border: none;
+.appointment-info h4 {
+    color: #0056b3;
+    margin-bottom: 4px;
 }
 
-.calendar-day.current {
-    background-color: #e6f0fa;
-    border: 2px solid #0056b3;
-    font-weight: bold;
+.appointment-info p {
+    font-size: 0.9rem;
+    color: #555;
 }
 
-.calendar-day.bookmarked {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-}
-
-.event-tag {
-    font-size: 0.7rem;
-    background-color: #28a745;
-    color: white;
-    padding: 2px 4px;
-    border-radius: 3px;
-    margin-top: 5px;
+.no-appointments {
     text-align: center;
+    color: #888;
+    padding: 30px 0;
+    font-style: italic;
 }
 
-/* Mensagem de Feedback Vazio */
+/* Feedback Busca */
 .no-results {
     text-align: center;
     font-size: 1.2rem;
@@ -344,12 +335,11 @@ header {
     font-weight: 500;
 }
 
-/* Utilitários */
 .hidden {
   display: none !important;
 }
 
-/* Media Query Responsiva */
+/* Responsividade */
 @media (max-width: 768px) {
     .toolbar {
         flex-direction: column;
@@ -357,22 +347,6 @@ header {
     }
     .btn-calendar {
         justify-content: center;
-    }
-    .calendar-grid {
-        gap: 4px;
-    }
-    .calendar-day {
-        min-height: 50px;
-        font-size: 0.8rem;
-    }
-    .event-tag {
-        display: none; /* Esconde texto longo de eventos no celular */
-    }
-    .calendar-day.bookmarked::after {
-        content: "•";
-        color: #28a745;
-        font-size: 1.2rem;
-        text-align: center;
     }
 }
 
