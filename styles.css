@@ -16,7 +16,6 @@ a {
     color: inherit;
 }
 
-/* Layout Base */
 .container {
     padding: 0 1.5rem;
     max-width: 1024px;
@@ -59,11 +58,11 @@ header {
 }
 
 .nav-link.active {
-  background-color: #0056b3;
-  color: #fff;
+    background-color: #0056b3;
+    color: #fff;
 }
 
-/* Conteúdo Principal e Toolbar */
+/* Main e Toolbar */
 .main {
     padding-top: 110px; 
 }
@@ -94,7 +93,7 @@ header {
     box-shadow: 0 0 8px rgba(0, 86, 179, 0.1);
 }
 
-/* Botão do Calendário */
+/* Botão Calendário */
 .btn-calendar {
     display: flex;
     align-items: center;
@@ -123,7 +122,6 @@ header {
     padding: 10px 0;
 }
 
-/* Estilização dos Cards */
 .card-services {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
@@ -135,7 +133,7 @@ header {
     text-align: center;
     gap: 1.2rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card-services:hover {
@@ -155,7 +153,6 @@ header {
     color: #444;
 }
 
-/* Botão de Agendar Interno */
 .btn-agendar {
     background-color: #0056b3;
     color: white;
@@ -163,12 +160,7 @@ header {
     border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
-    transition: background-color 0.2s;
     width: 80%;
-}
-
-.card-services:hover .btn-agendar {
-    background-color: #003d82;
 }
 
 /* Modais */
@@ -187,17 +179,17 @@ header {
 
 .modal-content {
     background-color: white;
-    padding: 40px;
+    padding: 35px;
     border-radius: 16px;
     max-width: 500px;
     width: 90%;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
+    from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
 
@@ -212,23 +204,18 @@ header {
     color: #aaa;
 }
 
-.close-modal:hover {
-    color: #333;
-}
-
 .modal-subtitle {
     color: #666;
     margin-bottom: 20px;
     font-size: 0.95rem;
 }
 
-/* Formulário */
+/* Formulários internos */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    text-align: left;
+    gap: 6px;
 }
 
 .form-group label {
@@ -243,16 +230,10 @@ header {
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
-    background-color: #fff;
-}
-
-.field-form:focus {
-    border-color: #0056b3;
 }
 
 .field-form:disabled {
     background-color: #f5f5f5;
-    color: #999;
     cursor: not-allowed;
 }
 
@@ -261,7 +242,6 @@ header {
     border: 2px solid #eee;
     background-color: #f5f5f5;
     border-radius: 8px;
-    font-size: 1rem;
     color: #777;
     font-weight: 600;
 }
@@ -276,92 +256,107 @@ header {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-.btn-submit:hover {
-    background-color: #003d82;
-}
-
-/* Customização para Visualização da Agenda */
+/* ESTILIZAÇÃO DO CALENDÁRIO MATRIZ (DOM A SÁB) */
 .modal-calendar-content {
-    max-width: 600px;
+    max-width: 900px; /* Alargado para caber o formato de folha mensal */
+    width: 95%;
 }
 
-.calendar-list-view {
+.calendar-wrapper {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #e0e0e0;
+    gap: 1px; /* Cria linhas divisórias finas */
+}
+
+.calendar-day-cell {
+    background-color: #fff;
+    min-height: 90px;
+    padding: 6px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 15px;
-    padding-right: 5px;
+    align-items: flex-start;
 }
 
-.appointment-item {
-    background-color: #f1f8ff;
-    border-left: 5px solid #0056b3;
-    padding: 15px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.appointment-info h4 {
-    color: #0056b3;
-    margin-bottom: 4px;
-}
-
-.appointment-info p {
+.calendar-day-cell .day-number {
+    font-weight: 600;
     font-size: 0.9rem;
-    color: #555;
+    color: #666;
+    margin-bottom: 6px;
 }
 
-.no-appointments {
-    text-align: center;
-    color: #888;
-    padding: 30px 0;
-    font-style: italic;
+/* Dias vazios que não pertencem ao mês ativo */
+.calendar-day-cell.empty-cell {
+    background-color: #f5f5f5;
 }
 
-/* Feedback Busca */
+/* Container interno de agendamentos no dia */
+.day-events-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    max-height: 65px;
+}
+
+/* Tag visual do agendamento dentro da célula */
+.calendar-event-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 3px solid #28a745;
+    padding: 2px 4px;
+    border-radius: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Feedback vazio da busca */
 .no-results {
     text-align: center;
     font-size: 1.2rem;
     color: #777;
     padding: 40px 0;
-    font-weight: 500;
 }
 
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
-/* Responsividade */
+/* Responsividade do Calendário Folha */
 @media (max-width: 768px) {
     .toolbar {
         flex-direction: column;
         align-items: stretch;
     }
-    .btn-calendar {
-        justify-content: center;
+    .calendar-day-cell {
+        min-height: 65px;
+        padding: 4px;
     }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        justify-content: center; 
-        gap: 0.8rem;
-    }
-    .nav-link {
-        font-size: 0.85rem;
-    }
-    .main {
-        padding-top: 150px; 
-    }
-    .cards {
-      grid-template-columns: 1fr; 
+    .calendar-event-tag {
+        font-size: 0.65rem;
+        padding: 1px;
     }
 }

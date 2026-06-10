@@ -29,7 +29,7 @@
         </div>
         <button id="btnViewCalendar" class="btn-calendar">
           <span class="material-symbols-outlined">calendar_month</span>
-          Ver Agendamentos
+          Ver Calendário
         </button>
       </div>
 
@@ -69,7 +69,7 @@
   <div id="bookingModal" class="modal-overlay hidden">
     <div class="modal-content">
       <button class="close-modal" id="closeModalBtn">&times;</button>
-      <h2 id="modalTitle">Agendar Serviço</h2>
+      <h2>Agendar Serviço</h2>
       <p class="modal-subtitle">Horários disponíveis de 8h às 12h e 14h às 17h.</p>
       
       <form id="bookingForm">
@@ -80,7 +80,7 @@
         
         <div class="form-group">
           <label for="bookingDate">Escolha a Data</label>
-          <input type="date" id="bookingDate" required class="field-form">
+          <input type="date" id="bookingDate" min="2026-06-01" max="2026-06-30" required class="field-form">
         </div>
         
         <div class="form-group">
@@ -98,11 +98,14 @@
   <div id="calendarModal" class="modal-overlay hidden">
     <div class="modal-content modal-calendar-content">
       <button class="close-modal" id="closeCalendarBtn">&times;</button>
-      <h2>Meus Agendamentos Marcados</h2>
-      <p class="modal-subtitle">Abaixo estão listados de forma organizada todos os seus compromissos ativos.</p>
+      <h2>Calendário de Agendamentos</h2>
+      <p class="modal-subtitle">Visualização de compromissos para <strong>Junho de 2026</strong>.</p>
       
-      <div id="calendarList" class="calendar-list-view">
-        <p class="no-appointments">Nenhum agendamento realizado ainda.</p>
+      <div class="calendar-wrapper">
+        <div class="calendar-weekdays">
+          <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
       </div>
     </div>
   </div>
