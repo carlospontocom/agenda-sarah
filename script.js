@@ -1,41 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Componentes principais da UI
+    // Referências das "Páginas" Virtuais
+    const servicesPage = document.getElementById('servicesPage');
+    const calendarPage = document.getElementById('calendarPage');
+    const navHome = document.getElementById('navHome');
+
+    // Elementos de Busca / Cards
     const searchInput = document.getElementById('searchInput');
-    const servicesGrid = document.getElementById('servicesGrid');
-    const cards = servicesGrid.querySelectorAll('.card-services');
+    const cards = document.querySelectorAll('.card-services');
     const noResultsMessage = document.getElementById('noResultsMessage');
 
-    // Modais e formulários
+    // Modais e Formulários
     const bookingModal = document.getElementById('bookingModal');
-    const calendarModal = document.getElementById('calendarModal');
     const actionModal = document.getElementById('actionModal');
     const calendarGrid = document.getElementById('calendarGrid');
 
-    // Formulário Novo Registro
     const bookingForm = document.getElementById('bookingForm');
     const modalServiceInput = document.getElementById('modalService');
     const bookingDateInput = document.getElementById('bookingDate');
     const bookingTimeSelect = document.getElementById('bookingTime');
 
-    // Formulário Edição
     const editForm = document.getElementById('editForm');
     const editDateInput = document.getElementById('editDate');
     const editTimeSelect = document.getElementById('editTime');
     const actionModalTitle = document.getElementById('actionModalTitle');
 
-    // Botões controladores
-    const btnViewCalendar = document.getElementById('btnViewCalendar');
+    // Botões de Navegação e Ação
+    const btnGoToCalendar = document.getElementById('btnGoToCalendar');
+    const btnBackToServices = document.getElementById('btnBackToServices');
     const closeModalBtn = document.getElementById('closeModalBtn');
-    const closeCalendarBtn = document.getElementById('closeCalendarBtn');
     const closeActionModalBtn = document.getElementById('closeActionModalBtn');
     const btnTriggerEdit = document.getElementById('btnTriggerEdit');
     const btnDeleteAppointment = document.getElementById('btnDeleteAppointment');
 
-    // Variáveis de controle de Estado Interno
+    // Estado do App
     let selectedAppointmentId = null; 
     const availableHoursRange = ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
 
-    // Base de dados simulada (Array de objetos editáveis)
+    // Dados Fictícios Iniciais (Junho 2026)
     let appointmentsDatabase = [
         { id: 1, service: "Nutrição", date: "2026-06-03", time: "09:00" },
         { id: 2, service: "Fisioterapia Esportiva", date: "2026-06-03", time: "14:00" },
@@ -43,7 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     /* ==========================================================================
-       1. SISTEMA DE FILTRO / BUSCA EM TEMPO REAL
+       1. ROTEAMENTO INTERNO (MUDANÇA DE PÁGINAS)
+       ========================================================================== */
+    function showCalendarPage() {
+        servicesPage.classList.add('hidden');
+        calendarPage.classList.remove('hidden');
+        navHome.classList.remove('active');
+        renderMonthlyCalendar(); // Renderiza sempre atualizado
+    }
+
+    function showServicesPage() {
+        calendarPage.classList.add('hidden');
+        servicesPage.classList.remove('hidden');
+        navHome.classList.add('active');
+    }
+
+    btnGoToCalendar.addEventListener('click', showCalendarPage);
+    btnBackToServices.addEventListener('click', showServicesPage);
+    navHome.addEventListener('click', (e) => { e.preventDefault(); showServicesPage(); });
+
+    /* ==========================================================================
+       2. FILTRO DE BUSCA (NA PÁGINA DE SERVIÇOS)
        ========================================================================== */
     searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
@@ -69,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       2. FUNÇÕES AUXILIARES DE VALIDAÇÃO DE HORÁRIOS ACUMULADOS
+       3. LOGICA DE HORÁRIOS DISPONÍVEIS (VALIDAÇÃO DE CONFLITOS)
        ========================================================================== */
     function updateHoursDropdown(dateInput, timeSelect, ignoreAppId = null) {
         const selectedDate = dateInput.value;
@@ -78,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Filtra ocupados ignorando o ID atual se for uma edição (permite re-salvar no mesmo horário)
         const bookedTimes = appointmentsDatabase
             .filter(app => app.date === selectedDate && app.id !== ignoreAppId)
             .map(app => app.time);
@@ -98,16 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         timeSelect.disabled = freeSlots === 0;
         if (freeSlots === 0) {
-            timeSelect.innerHTML = '<option value="">Sem horários livres nesta data</option>';
+            timeSelect.innerHTML = '<option value="">Sem horários disponíveis</option>';
         }
     }
 
-    // Ouvintes para calcular vagas em tempo real nas duas telas
     bookingDateInput.addEventListener('change', () => updateHoursDropdown(bookingDateInput, bookingTimeSelect));
     editDateInput.addEventListener('change', () => updateHoursDropdown(editDateInput, editTimeSelect, selectedAppointmentId));
 
     /* ==========================================================================
-       3. INCLUSÃO DE NOVOS AGENDAMENTOS
+       4. CRIAÇÃO DE NOVOS AGENDAMENTOS (VIA CARD)
        ========================================================================== */
     cards.forEach(card => {
         card.addEventListener('click', () => {
@@ -128,25 +147,28 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingModal.classList.add('hidden');
         bookingForm.reset();
         bookingTimeSelect.disabled = true;
-        alert("Agendamento cadastrado com sucesso!");
+        
+        if(confirm("Agendamento realizado! Deseja abrir o calendário para visualizar?")) {
+            showCalendarPage();
+        }
     });
 
     /* ==========================================================================
-       4. CONSTRUÇÃO DO CALENDÁRIO MENSAL DINÂMICO
+       5. MONTAGEM DINÂMICA DA PÁGINA DO CALENDÁRIO MATRIZ
        ========================================================================== */
     function renderMonthlyCalendar() {
         calendarGrid.innerHTML = "";
         const totalDays = 30; // Junho
-        const startDayOfWeek = 1; // Começa numa Segunda-feira em 2026
+        const startDayOfWeek = 1; // Segunda-feira em 2026
 
-        // Espaços em branco (alinhamento de colunas)
+        // Espaços vazios do início da folha do mês
         for (let i = 0; i < startDayOfWeek; i++) {
             const emptyCell = document.createElement('div');
             emptyCell.className = "calendar-day-cell empty-cell";
             calendarGrid.appendChild(emptyCell);
         }
 
-        // Dias numéricos
+        // Dias úteis de Junho
         for (let day = 1; day <= totalDays; day++) {
             const cell = document.createElement('div');
             cell.className = "calendar-day-cell";
@@ -166,9 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     tag.className = "calendar-event-tag";
                     tag.textContent = `${app.time} - ${app.service}`;
                     
-                    // GATILHO CRUCIAL: Abre gerenciador ao clicar na tag do evento
+                    // Evento de clique para Editar/Excluir
                     tag.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Impede fechar modal pai
+                        e.stopPropagation();
                         openActionManager(app);
                     });
 
@@ -180,22 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    btnViewCalendar.addEventListener('click', () => {
-        renderMonthlyCalendar();
-        calendarModal.classList.remove('hidden');
-    });
-
     /* ==========================================================================
-       5. SISTEMA DE GERENCIAMENTO (CRUD: EDITA & DELETA)
+       6. OPERAÇÕES DE GERENCIAMENTO (EDITAR / EXCLUIR)
        ========================================================================== */
     function openActionManager(app) {
         selectedAppointmentId = app.id;
         actionModalTitle.textContent = `Gerenciar: ${app.service}`;
-        
-        // Esconde o subformulário de edição caso estivesse aberto antes
         editForm.classList.add('hidden'); 
         
-        // Carrega os dados atuais nos inputs para facilitar a modificação
         editDateInput.value = app.date;
         updateHoursDropdown(editDateInput, editTimeSelect, app.id);
         editTimeSelect.value = app.time;
@@ -203,49 +217,40 @@ document.addEventListener('DOMContentLoaded', () => {
         actionModal.classList.remove('hidden');
     }
 
-    // Exibe o painel/form oculto de edição ao clicar no botão amarelo
     btnTriggerEdit.addEventListener('click', () => {
         editForm.classList.remove('hidden');
     });
 
-    // Submissão da Alteração (Update)
     editForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
-        // Localiza a referência no array original
         const appIndex = appointmentsDatabase.findIndex(app => app.id === selectedAppointmentId);
         if (appIndex !== -1) {
             appointmentsDatabase[appIndex].date = editDateInput.value;
             appointmentsDatabase[appIndex].time = editTimeSelect.value;
             
             actionModal.classList.add('hidden');
-            renderMonthlyCalendar(); // Força o redesenho do calendário instantaneamente
-            alert("Agendamento atualizado com sucesso!");
+            renderMonthlyCalendar();
+            alert("Agendamento modificado!");
         }
     });
 
-    // Exclusão Direta (Delete)
     btnDeleteAppointment.addEventListener('click', () => {
-        if (confirm("Tem certeza que deseja excluir permanentemente este agendamento?")) {
-            // Remove o objeto filtrando o array por ID
+        if (confirm("Deseja realmente cancelar este agendamento?")) {
             appointmentsDatabase = appointmentsDatabase.filter(app => app.id !== selectedAppointmentId);
-            
             actionModal.classList.add('hidden');
-            renderMonthlyCalendar(); // Recarrega o calendário limpo
-            alert("Agendamento excluído.");
+            renderMonthlyCalendar();
+            alert("Agendamento cancelado com sucesso.");
         }
     });
 
     /* ==========================================================================
-       6. FECHAMENTO DE MODAIS
+       7. FECHAMENTO DE MODAIS EXTERNOS
        ========================================================================== */
     closeModalBtn.addEventListener('click', () => { bookingModal.classList.add('hidden'); bookingForm.reset(); bookingTimeSelect.disabled = true; });
-    closeCalendarBtn.addEventListener('click', () => calendarModal.classList.add('hidden'));
     closeActionModalBtn.addEventListener('click', () => actionModal.classList.add('hidden'));
 
     window.addEventListener('click', (e) => {
         if (e.target === bookingModal) { bookingModal.classList.add('hidden'); bookingForm.reset(); bookingTimeSelect.disabled = true; }
-        if (e.target === calendarModal) calendarModal.classList.add('hidden');
         if (e.target === actionModal) actionModal.classList.add('hidden');
     });
 });

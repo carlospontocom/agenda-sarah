@@ -13,7 +13,7 @@
 
   <header>
     <nav class="navbar container">
-      <a href="#" class="nav-link active">Home</a>
+      <a href="#" id="navHome" class="nav-link active">Home</a>
       <a href="#" class="nav-link">Paciente</a>
       <a href="#" class="nav-link">Agenda do Dia</a>
       <a href="#" class="nav-link">Próximas Atividades</a>
@@ -23,44 +23,66 @@
   <main class="main">
     <div class="container">
 
-      <div class="toolbar">
-        <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field" autocomplete="off">
+      <div id="servicesPage" class="page-view">
+        <div class="toolbar">
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por serviços" class="field" autocomplete="off">
+          </div>
+          <button id="btnGoToCalendar" class="btn-calendar">
+            <span class="material-symbols-outlined">calendar_month</span>
+            Ver Calendário Completo
+          </button>
         </div>
-        <button id="btnViewCalendar" class="btn-calendar">
-          <span class="material-symbols-outlined">calendar_month</span>
-          Ver Calendário
-        </button>
+
+        <div class="cards" id="servicesGrid">
+          <div class="card-services" data-service-name="Terapia Ocupacional">
+            <span class="material-symbols-outlined">work_history</span>
+            <p>Terapia Ocupacional</p>
+            <span class="btn-agendar">Agendar</span>
+          </div>
+
+          <div class="card-services" data-service-name="Fisioterapia Esportiva">
+            <span class="material-symbols-outlined">sports_gymnastics</span>
+            <p>Fisioterapia Esportiva</p>
+            <span class="btn-agendar">Agendar</span>
+          </div>
+
+          <div class="card-services" data-service-name="Nutrição">
+            <span class="material-symbols-outlined">nutrition</span>
+            <p>Nutrição</p>
+            <span class="btn-agendar">Agendar</span>
+          </div>
+
+          <div class="card-services" data-service-name="Psicologia do Esporte">
+            <span class="material-symbols-outlined">psychology</span>
+            <p>Psicologia do Esporte</p>
+            <span class="btn-agendar">Agendar</span>
+          </div>
+        </div>
+
+        <div id="noResultsMessage" class="no-results hidden">
+          Serviços não encontrados
+        </div>
       </div>
 
-      <div class="cards" id="servicesGrid">
-        <div class="card-services" data-service-name="Terapia Ocupacional">
-          <span class="material-symbols-outlined">work_history</span>
-          <p>Terapia Ocupacional</p>
-          <span class="btn-agendar">Agendar</span>
+      <div id="calendarPage" class="page-view hidden">
+        <div class="calendar-header-actions">
+          <button id="btnBackToServices" class="btn-back">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Voltar para Serviços
+          </button>
+          <div class="calendar-title-wrapper">
+            <h2>Painel de Agendamentos</h2>
+            <p>Junho de 2026 — Clique em qualquer compromisso para Editar ou Remover</p>
+          </div>
         </div>
 
-        <div class="card-services" data-service-name="Fisioterapia Esportiva">
-          <span class="material-symbols-outlined">sports_gymnastics</span>
-          <p>Fisioterapia Esportiva</p>
-          <span class="btn-agendar">Agendar</span>
+        <div class="calendar-wrapper">
+          <div class="calendar-weekdays">
+            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+          </div>
+          <div id="calendarGrid" class="calendar-grid"></div>
         </div>
-
-        <div class="card-services" data-service-name="Nutrição">
-          <span class="material-symbols-outlined">nutrition</span>
-          <p>Nutrição</p>
-          <span class="btn-agendar">Agendar</span>
-        </div>
-
-        <div class="card-services" data-service-name="Psicologia do Esporte">
-          <span class="material-symbols-outlined">psychology</span>
-          <p>Psicologia do Esporte</p>
-          <span class="btn-agendar">Agendar</span>
-        </div>
-      </div>
-
-      <div id="noResultsMessage" class="no-results hidden">
-        Serviços não encontrados
       </div>
 
     </div>
@@ -70,7 +92,7 @@
     <div class="modal-content">
       <button class="close-modal" id="closeModalBtn">&times;</button>
       <h2>Agendar Serviço</h2>
-      <p class="modal-subtitle">Horários disponíveis de 8h às 12h e 14h às 17h.</p>
+      <p class="modal-subtitle">Horários de 1h em 1h (8h às 12h e 14h às 17h).</p>
       
       <form id="bookingForm">
         <div class="form-group">
@@ -92,33 +114,18 @@
     </div>
   </div>
 
-  <div id="calendarModal" class="modal-overlay hidden">
-    <div class="modal-content modal-calendar-content">
-      <button class="close-modal" id="closeCalendarBtn">&times;</button>
-      <h2>Calendário de Agendamentos</h2>
-      <p class="modal-subtitle">Clique em cima de um agendamento para Editar ou Excluir.</p>
-      
-      <div class="calendar-wrapper">
-        <div class="calendar-weekdays">
-          <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-        </div>
-        <div id="calendarGrid" class="calendar-grid"></div>
-      </div>
-    </div>
-  </div>
-
   <div id="actionModal" class="modal-overlay hidden">
     <div class="modal-content action-modal-content">
       <button class="close-modal" id="closeActionModalBtn">&times;</button>
       <h3 id="actionModalTitle">Gerenciar Agendamento</h3>
-      <p class="modal-subtitle">O que você deseja fazer com este compromisso?</p>
+      <p class="modal-subtitle">Modifique o horário ou cancele a consulta.</p>
       
       <div class="action-buttons-group">
         <button id="btnTriggerEdit" class="btn-action btn-edit-trigger">
           <span class="material-symbols-outlined">edit</span> Editar Horário
         </button>
         <button id="btnDeleteAppointment" class="btn-action btn-delete">
-          <span class="material-symbols-outlined">delete</span> Excluir Agendamento
+          <span class="material-symbols-outlined">delete</span> Cancelar Consulta
         </button>
       </div>
 
