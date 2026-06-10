@@ -4,84 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="styles.css">
   <title>Agenda de Reabilitação - SARAH</title>
 </head>
 
 <body>
 
   <header>
-    <nav class="navbar">
-         <a href="">home</a>
-         <a href="">paciente</a>
-         <a href="">agenda do dia</a>
-         <a href="">próximas atividades</a>
-     </nav>
+    <nav class="navbar container">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Paciente</a>
+      <a href="#" class="nav-link">Agenda do Dia</a>
+      <a href="#" class="nav-link">Próximas Atividades</a>
+    </nav>
   </header>
 
   <main class="main">
-    
-<div class="container">
+    <div class="container">
 
-  <div>
-    <input type="text" placeholder="Buscar por serviços" class="field">
-  </div>
-  <div>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar por serviços" class="field">
+      </div>
 
-    <div class="cards">
-      
+      <div class="cards">
+        <div class="card-services">
+          <span class="material-symbols-outlined">home</span>
+          <p>Início</p>
+        </div>
 
-    <!-- card 1 -->
-    <div class="card-services">
-      <span class="material-symbols-outlined">home</span>
-      Início
-    </div>
-    <!-- /card 1 -->
+        <div class="card-services">
+          <span class="material-symbols-outlined">exercise</span>
+          <p>Terapia funcional</p>
+        </div>
 
+        <div class="card-services">
+          <span class="material-symbols-outlined">exercise</span>
+          <p>Fisioterapia</p>
+        </div>
 
-
-    <!-- card 2 -->
-    <div class="card-services">
-      <span class="material-symbols-outlined">
-        exercise
-      </span> 
-      <p>
-        Terapia funcional
-      </p>
-    </div>
-    <!-- /card 2 -->
-
-
-
-    <!-- card 3 -->
-    <div class="card-services">
-      <span class="material-symbols-outlined">
-        exercise
-      </span> 
-      <p></p>
-    </div>
-    <!-- /card 3 -->
-
-    <!-- card 4 -->
-    <div class="card-services">
-      <span class="material-symbols-outlined">
-        groups
-      </span>
+        <div class="card-services">
+          <span class="material-symbols-outlined">groups</span>
+          <p>Atividade em Grupo</p>
+        </div>
+      </div>
 
     </div>
-    <!-- /card 4 -->
-     
-    </div>
-    groups
-    </span>
-
-
-  </div>
-
-
   </main>
-</body>
 
+</body>
 </html>
