@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             actionModal.classList.add('hidden');
             renderMonthlyCalendar();
             alert("Agendamento excluído.");
-        }
+        } 
     });
 
     /* ==========================================================================
