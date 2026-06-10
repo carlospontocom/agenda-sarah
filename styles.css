@@ -163,7 +163,7 @@ header {
     width: 80%;
 }
 
-/* Modais */
+/* Modais Estrutura */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -185,11 +185,11 @@ header {
     width: 90%;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.25s ease-out;
+    animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
+    from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
 }
 
@@ -204,18 +204,23 @@ header {
     color: #aaa;
 }
 
+.close-modal:hover {
+    color: #333;
+}
+
 .modal-subtitle {
     color: #666;
     margin-bottom: 20px;
     font-size: 0.95rem;
 }
 
-/* Formulários internos */
+/* Formulários */
 .form-group {
     margin-bottom: 18px;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    text-align: left;
 }
 
 .form-group label {
@@ -230,6 +235,7 @@ header {
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
+    background-color: white;
 }
 
 .field-form:disabled {
@@ -258,9 +264,13 @@ header {
     cursor: pointer;
 }
 
-/* ESTILIZAÇÃO DO CALENDÁRIO MATRIZ (DOM A SÁB) */
+.btn-submit:hover {
+    background-color: #003d82;
+}
+
+/* CALENDÁRIO MATRIZ */
 .modal-calendar-content {
-    max-width: 900px; /* Alargado para caber o formato de folha mensal */
+    max-width: 950px; 
     width: 95%;
 }
 
@@ -285,12 +295,12 @@ header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     background-color: #e0e0e0;
-    gap: 1px; /* Cria linhas divisórias finas */
+    gap: 1px;
 }
 
 .calendar-day-cell {
     background-color: #fff;
-    min-height: 90px;
+    min-height: 100px;
     padding: 6px;
     display: flex;
     flex-direction: column;
@@ -304,36 +314,93 @@ header {
     margin-bottom: 6px;
 }
 
-/* Dias vazios que não pertencem ao mês ativo */
 .calendar-day-cell.empty-cell {
     background-color: #f5f5f5;
 }
 
-/* Container interno de agendamentos no dia */
 .day-events-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
     overflow-y: auto;
-    max-height: 65px;
+    max-height: 70px;
 }
 
-/* Tag visual do agendamento dentro da célula */
+/* Tag Interativa de Agendamento */
 .calendar-event-tag {
     font-size: 0.72rem;
     font-weight: 600;
-    background-color: #d4edda;
-    color: #155724;
-    border-left: 3px solid #28a745;
-    padding: 2px 4px;
-    border-radius: 2px;
+    background-color: #e2f0fe;
+    color: #0056b3;
+    border-left: 3px solid #0056b3;
+    padding: 3px 5px;
+    border-radius: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s;
 }
 
-/* Feedback vazio da busca */
+.calendar-event-tag:hover {
+    background-color: #bce0fd;
+    transform: scale(1.02);
+}
+
+/* MODAL DE AÇÕES (EDITAR / EXCLUIR) */
+.action-modal-content {
+    max-width: 420px;
+}
+
+.action-buttons-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.btn-action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-action:hover {
+    opacity: 0.9;
+}
+
+.btn-edit-trigger {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.edit-inline-form {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.edit-inline-form hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+/* Utilitários Gerais */
 .no-results {
     text-align: center;
     font-size: 1.2rem;
@@ -345,18 +412,16 @@ header {
     display: none !important;
 }
 
-/* Responsividade do Calendário Folha */
+/* Responsividade */
 @media (max-width: 768px) {
     .toolbar {
         flex-direction: column;
         align-items: stretch;
     }
     .calendar-day-cell {
-        min-height: 65px;
-        padding: 4px;
+        min-height: 70px;
     }
-    .calendar-event-tag {
-        font-size: 0.65rem;
-        padding: 1px;
+    .action-buttons-group {
+        flex-direction: column;
     }
 }

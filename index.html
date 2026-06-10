@@ -77,19 +77,16 @@
           <label for="modalService">Serviço Selecionado</label>
           <input type="text" id="modalService" readonly class="field-disabled">
         </div>
-        
         <div class="form-group">
           <label for="bookingDate">Escolha a Data</label>
           <input type="date" id="bookingDate" min="2026-06-01" max="2026-06-30" required class="field-form">
         </div>
-        
         <div class="form-group">
           <label for="bookingTime">Escolha o Horário</label>
           <select id="bookingTime" required class="field-form" disabled>
             <option value="">Selecione primeiro a data...</option>
           </select>
         </div>
-        
         <button type="submit" class="btn-submit">Confirmar Agendamento</button>
       </form>
     </div>
@@ -99,7 +96,7 @@
     <div class="modal-content modal-calendar-content">
       <button class="close-modal" id="closeCalendarBtn">&times;</button>
       <h2>Calendário de Agendamentos</h2>
-      <p class="modal-subtitle">Visualização de compromissos para <strong>Junho de 2026</strong>.</p>
+      <p class="modal-subtitle">Clique em cima de um agendamento para Editar ou Excluir.</p>
       
       <div class="calendar-wrapper">
         <div class="calendar-weekdays">
@@ -107,6 +104,38 @@
         </div>
         <div id="calendarGrid" class="calendar-grid"></div>
       </div>
+    </div>
+  </div>
+
+  <div id="actionModal" class="modal-overlay hidden">
+    <div class="modal-content action-modal-content">
+      <button class="close-modal" id="closeActionModalBtn">&times;</button>
+      <h3 id="actionModalTitle">Gerenciar Agendamento</h3>
+      <p class="modal-subtitle">O que você deseja fazer com este compromisso?</p>
+      
+      <div class="action-buttons-group">
+        <button id="btnTriggerEdit" class="btn-action btn-edit-trigger">
+          <span class="material-symbols-outlined">edit</span> Editar Horário
+        </button>
+        <button id="btnDeleteAppointment" class="btn-action btn-delete">
+          <span class="material-symbols-outlined">delete</span> Excluir Agendamento
+        </button>
+      </div>
+
+      <form id="editForm" class="hidden edit-inline-form">
+        <hr>
+        <div class="form-group">
+          <label for="editDate">Nova Data</label>
+          <input type="date" id="editDate" min="2026-06-01" max="2026-06-30" required class="field-form">
+        </div>
+        <div class="form-group">
+          <label for="editTime">Novo Horário</label>
+          <select id="editTime" required class="field-form" disabled>
+            <option value="">Selecione a data...</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Salvar Alterações</button>
+      </form>
     </div>
   </div>
 
